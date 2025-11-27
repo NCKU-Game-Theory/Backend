@@ -1,14 +1,23 @@
 # Author : ysh
 # 2025/11/17 Mon 17:37:45
-from core.general import *
+# from core.general import *
+info = warning = lambda *x, **y: None
 
-def ok(data = None, **ot) -> dict:
+def ok(data = None, custom: bool = False, **ot) -> dict:
+    if data is not None:
+        ot['data'] = data
     info('OK detected, returning ' + str({
+        'ok': True,
+        'data': ot
+    } if not custom else {
         'ok': True,
         'data': data,
         **ot
     }))
     return {
+        'ok': True,
+        'data': ot
+    } if not custom else {
         'ok': True,
         'data': data,
         **ot
@@ -25,3 +34,6 @@ def fail(error = None) -> dict:
         'data': error,
         'error': error
     }
+
+if __name__ == '__main__':
+    print(ok('ouob', test = True, number = 1, zzz = True))

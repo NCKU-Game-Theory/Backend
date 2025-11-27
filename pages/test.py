@@ -13,3 +13,7 @@ app = Blueprint('test', __name__)
 def echo():
     print(request.values)
     return request.values
+
+@app.route('/beat', methods = ['GET', 'POST'])
+def heart_beat():
+    return ok()
